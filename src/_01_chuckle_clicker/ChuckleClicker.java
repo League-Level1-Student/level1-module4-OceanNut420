@@ -1,37 +1,52 @@
 package _01_chuckle_clicker;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class ChuckleClicker {
+public class ChuckleClicker implements ActionListener {
 
 	public static void main(String[] args) {
 		
-		makeButtons();
+		//makeButtons();
 		
 	}
 
-	private static void makeButtons() {
+	JButton jokeButton = new JButton();
+	JButton punchButton = new JButton();
+	
+	public void makeButtons() {
 		JOptionPane.showMessageDialog(null, "Make Buttons");
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-		JButton jokeButton = new JButton();
-		JButton punchButton = new JButton();
 		
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(panel);
+		
 		panel.add(jokeButton);
 		panel.add(punchButton);
+		
 		jokeButton.setText("joke");
 		punchButton.setText("punchline");
-		jokeButton.addActionListener(null);
+		jokeButton.addActionListener(this);
+		punchButton.addActionListener(this);
 		
-		if(1==1) {
-			
-		}
 		
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton buttonClick = (JButton) e.getSource();
+		
+		if() {
+			JOptionPane.showMessageDialog(null, "hi");
+		}
+	}
+	
 
 }
