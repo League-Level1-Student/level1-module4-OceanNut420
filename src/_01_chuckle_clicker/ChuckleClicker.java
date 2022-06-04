@@ -12,7 +12,7 @@ public class ChuckleClicker implements ActionListener {
 
 	public static void main(String[] args) {
 		
-		//makeButtons();
+		new ChuckleClicker().makeButtons();
 		
 	}
 
@@ -26,16 +26,16 @@ public class ChuckleClicker implements ActionListener {
 		
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(panel);
-		
-		panel.add(jokeButton);
-		panel.add(punchButton);
 		
 		jokeButton.setText("joke");
 		punchButton.setText("punchline");
 		jokeButton.addActionListener(this);
 		punchButton.addActionListener(this);
 		
+		panel.add(jokeButton);
+		panel.add(punchButton);
+		frame.add(panel);
+		frame.pack();
 		
 	}
 
@@ -43,8 +43,13 @@ public class ChuckleClicker implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonClick = (JButton) e.getSource();
 		
-		if() {
+		if(buttonClick == jokeButton) {
 			JOptionPane.showMessageDialog(null, "hi");
+			System.out.println("tu padre");
+		}
+		else if(buttonClick == punchButton) {
+			JOptionPane.showMessageDialog(null, "hi");
+			System.out.println("que hiciste el fin de semana pasado?");
 		}
 	}
 	
