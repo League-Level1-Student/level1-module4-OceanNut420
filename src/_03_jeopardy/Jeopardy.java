@@ -36,7 +36,7 @@ import javax.swing.JPanel;
 public class Jeopardy implements ActionListener {
 	private JButton firstButton;
 	private JButton secondButton;
-	private JButton thirdButton, fourthButton;
+	private JButton thirdButton, fourthButton, fifthButton;
 	private JPanel quizPanel;
 	private int score = 0;
 	private JLabel scoreBox = new JLabel("0");
@@ -54,15 +54,15 @@ public class Jeopardy implements ActionListener {
 		// 1. Make the frame show up
 		frame.setVisible(true);
 		// 2. Give your frame a title
-		frame.setTitle("Fish Eating Competition");
+		frame.setTitle("Fish");
 		// 3. Create a JPanel variable to hold the header using the createHeader method
-		JPanel panel = createHeader("Fish Eating Competition");
+		JPanel panel = createHeader("Fish");
 		// 4. Add the header component to the quizPanel
 		quizPanel.add(panel);
 		// 5. Add the quizPanel to the frame
 		frame.add(quizPanel);
 		// 6. Use the createButton method to set the value of firstButton
-		JButton firstButton = createButton("$1");
+		firstButton = createButton("$2");
 		// 7. Add the firstButton to the quizPanel
 		quizPanel.add(firstButton);
 		// 8. Write the code to complete the createButton() method below. Check that your
@@ -70,16 +70,22 @@ public class Jeopardy implements ActionListener {
 		//0__0?
 		// 9. Use the secondButton variable to hold a button using the createButton
 		// method
-		JButton secondButton = createButton("$2");
+		secondButton = createButton("$4");
 		// 10. Add the secondButton to the quizPanel
 		quizPanel.add(secondButton);
 		// 11. Add action listeners to the buttons (2 lines of code)
 		firstButton.addActionListener(this);
 		secondButton.addActionListener(this);
+		
 		// 12. Write the code to complete the actionPerformed() method below
 		//no
 		// 13. Add buttons so that you have $200, $400, $600, $800 and $1000 questions
-		
+		thirdButton = createButton("$6");
+		fourthButton = createButton("$8");
+		fifthButton = createButton("$10");
+		quizPanel.add(thirdButton);
+		quizPanel.add(fourthButton);
+		quizPanel.add(fifthButton);
 		 /*
 		 * [optional] Use the showImage or playSound methods when the user answers a
 		 * question
@@ -111,20 +117,34 @@ public class Jeopardy implements ActionListener {
 		// Remove this temporary message after testing:
 		
 
-		JButton buttonPressed = (JButton) e.getSource();
+		JButton buttonClick = (JButton) e.getSource();
 		// If the buttonPressed was the firstButton
-		if(buttonPressed == firstButton) {
+		if(buttonClick == firstButton) {
 			// Call the askQuestion() method
-			askQuestion("What is the world record for least fish eaten in 10 days ago?","3.14159",1);
+			askQuestion("What?","what",2);
+			firstButton.setText("");
 		}
 		// Complete the code in the askQuestion() method. When you play the game, the score should change.
-		//no
-		// If the buttonPressed was the secondButton
 		
+		// If the buttonPressed was the secondButton
+		if(buttonClick == secondButton) {
 			// Call the askQuestion() method with a harder question
-
+			askQuestion("0__0?","0__0",4);
+			secondButton.setText("");
+		}
 		// Clear the text on the button that was pressed (set the button text to nothing)
-
+		if(buttonClick == thirdButton) {
+			askQuestion("augh?","augh",6);
+			thirdButton.setText("");
+		}
+		if(buttonClick == fourthButton) {
+			askQuestion("augh?","augh",8);
+			fourthButton.setText("");
+		}
+		if(buttonClick == fifthButton) {
+			askQuestion("augh?","augh",10);
+			fifthButton.setText("");
+		}
 	}
 
 	private void askQuestion(String question, String correctAnswer, int prizeMoney) {
@@ -137,7 +157,7 @@ public class Jeopardy implements ActionListener {
 		// Stop the theme music when they have entered their response. 
 		//ok
 		// If the answer is correct
-		if(answer == correctAnswer) {
+		if(answer.equals(correctAnswer)) {
 			// Increase the score by the prizeMoney
 			stopJeopardyTheme();
 			score = score + prizeMoney;
