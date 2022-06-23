@@ -1,11 +1,15 @@
 package _11_whack_a_mole;
 
+import java.applet.AudioClip;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.util.Random;
 
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class whackAMole implements ActionListener {
@@ -16,6 +20,9 @@ public class whackAMole implements ActionListener {
 	int m = rand.nextInt(23);
 	String aug = "";
 	JButton naw = new JButton();
+	int molsEaten = 0;
+	Date timeAtStart = new Date();
+	int miss = 0;
 	
 	void run(){
 		
@@ -61,16 +68,45 @@ public class whackAMole implements ActionListener {
             }
         }
     }
+	
+	private void endGame(Date timeAtStart, int molesWhacked) { 
+	    Date timeAtEnd = new Date();
+	    long end = timeAtEnd.getTime();
+	    long start = timeAtStart.getTime();
+	    JOptionPane.showMessageDialog(null, "Your whack rate is "
+	            + ((end - start) / 1000.00 / molesWhacked)
+	                  + " moles per second.");
+	}
 
+	private void playSound(String fileName) { 
+	    AudioClip sound = JApplet.newAudioClip(getClass().getResource(fileName));
+	    sound.play();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton buttonClick = (JButton) e.getSource();
 		if(buttonClick == naw) {
+			playSound("creepy-noise.wav");
+			panel.removeAll();
+			frame.setSize(266,316);
+			drawButtons(rand);
+			frame.setSize(265,315);
+			molsEaten++;
 			
+			if(molsEaten == 10) {
+				endGame(timeAtStart,10);
+			}
 		}
 		else{
 			speak("rong");
 			System.out.println("rong");
+			miss++;
+			
+			if(miss == 5) {
+				endGame(timeAtStart,10);
+				JOptionPane.showMessageDialog(null, "0__0 bad");
+			}
 		}
 		
 	}
